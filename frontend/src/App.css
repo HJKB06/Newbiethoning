@@ -153,6 +153,85 @@
   }
 }
 
+.progress-wrapper {
+  width: 100%;
+  max-width: 900px;
+  margin: 30px auto 10px;
+  padding: 0 24px;
+  box-sizing: border-box;
+}
+
+.progress-count {
+  text-align: center;
+  color: #777;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.progress-steps {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.progress-step {
+  flex: 1;
+  text-align: center;
+  position: relative;
+  color: #aaa;
+  font-size: 14px;
+}
+
+.progress-step:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 16px;
+  left: 60%;
+  width: 80%;
+  height: 2px;
+  background: #e5e5e5;
+  z-index: -1;
+}
+
+.progress-circle {
+  width: 32px;
+  height: 32px;
+  margin: 0 auto 8px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 50%;
+  background: #e5e5e5;
+  color: #777;
+
+  font-weight: 600;
+}
+
+.progress-step.active {
+  color: #5f8f78;
+  font-weight: 600;
+}
+
+.progress-step.active .progress-circle {
+  background: #5f8f78;
+  color: white;
+}
+
+.progress-step.completed {
+  color: #5f8f78;
+}
+
+.progress-step.completed .progress-circle {
+  background: #5f8f78;
+  color: white;
+}
+
+.progress-step.completed:not(:last-child)::after {
+  background: #5f8f78;
+}
+
 button { color: inherit; }
 button:focus-visible, input:focus-visible, select:focus-visible {
   outline: 3px solid rgba(40, 91, 59, 0.18);

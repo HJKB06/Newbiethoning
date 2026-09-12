@@ -8,6 +8,39 @@ import CommunityPage from "./pages/CommunityPage";
 import LifestylePage from "./pages/LifestylePage";
 import ResultsPage from "./pages/ResultsPage";
 
+function ProgressBar({ step }) {
+  const steps = ["Basic Info", "Housing", "Community", "Lifestyle"];
+
+  return (
+    <div className="progress-wrapper">
+      <p className="progress-count">
+        Step {step} of 4
+      </p>
+
+      <div className="progress-steps">
+        {steps.map((label, index) => {
+          const stepNumber = index + 1;
+
+          return (
+            <div
+              key={label}
+              className={`progress-step ${
+                stepNumber === step ? "active" : ""
+              } ${stepNumber < step ? "completed" : ""}`}
+            >
+              <div className="progress-circle">
+                {stepNumber}
+              </div>
+
+              <span>{label}</span>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 function App() {
   const [step, setStep] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
@@ -136,16 +169,61 @@ function App() {
     );
   }
   if (step === 1) {
-    return <BasicInfoPage data={data} onChange={updateData} onContinue={() => setStep(2)} />;
+    return (
+    <>
+      <ProgressBar step={1} />
+
+      <BasicInfoPage
+        data={data}
+        onChange={updateData}
+        onContinue={() => setStep(2)}
+      />
+    </>
+  );
   }
   if (step === 2) {
-    return <HousingPage value={data.housingType} onChange={(v) => updateData("housingType", v)} onBack={() => setStep(1)} onContinue={() => setStep(3)} />;
+    return (
+    <>
+      <ProgressBar step={2} />
+
+      <HousingPage
+        value={data.housingType}
+        onChange={(v) => updateData("housingType", v)}
+        onBack={() => setStep(1)}
+        onContinue={() => setStep(3)}
+      />
+    </>
+  );
   }
   if (step === 3) {
-    return <CommunityPage value={data.community} onChange={(v) => updateData("community", v)} onBack={() => setStep(2)} onContinue={() => setStep(4)} />;
+    return (
+    <>
+      <ProgressBar step={3} />
+
+      <CommunityPage
+        value={data.community}
+        onChange={(v) => updateData("community", v)}
+        onBack={() => setStep(2)}
+        onContinue={() => setStep(4)}
+      />
+    </>
+  );
   }
   if (step === 4) {
-    return <LifestylePage values={data.lifestyles} onToggle={toggleLifestyle} onBack={() => setStep(3)} onSubmit={generateResults} isLoading={isLoading} error={error} />;
+    return (
+    <>
+      <ProgressBar step={4} />
+
+      <LifestylePage
+        values={data.lifestyles}
+        onToggle={toggleLifestyle}
+        onBack={() => setStep(3)}
+        onSubmit={generateResults}
+        isLoading={isLoading}
+        error={error}
+      />
+    </>
+  );
   }
   if (step === 5) {
     return <ResultsPage results={results} preferences={data} onEdit={() => setStep(1)} onRestart={restartSearch} />;
