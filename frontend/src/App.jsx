@@ -9,7 +9,7 @@ import LifestylePage from "./pages/LifestylePage";
 import ResultsPage from "./pages/ResultsPage";
 
 function App() {
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -107,6 +107,34 @@ function App() {
   };
 
   // 4. Page Router
+  // HOMEPAGE
+  if (step === 0) {
+    return (
+      <div className="homepage">
+        <div className="homepage-content">
+          <h1 className="homepage-title">
+            Life<span>Fit</span>
+          </h1>
+
+          <h2 className="homepage-subtitle">
+            Find a home that fits your life.
+          </h2>
+
+          <p className="homepage-description">
+            Tell us your preferences — from budget to lifestyle —
+            and we'll recommend neighborhoods that match you best.
+          </p>
+
+          <button
+            className="begin-button"
+            onClick={() => setStep(1)}
+          >
+            Begin <span>→</span>
+          </button>
+        </div>
+      </div>
+    );
+  }
   if (step === 1) {
     return <BasicInfoPage data={data} onChange={updateData} onContinue={() => setStep(2)} />;
   }
