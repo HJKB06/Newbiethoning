@@ -7,6 +7,7 @@ import HousingPage from "./pages/HousingPage";
 import CommunityPage from "./pages/CommunityPage";
 import LifestylePage from "./pages/LifestylePage";
 import ResultsPage from "./pages/ResultsPage";
+import { fetchRecommendations } from "./services/recommendations.js";
 
 function App() {
   const [step, setStep] = useState(0);
@@ -63,43 +64,11 @@ function App() {
     setError(null);
 
     try {
-      // Step A: Save the User Profile to SQLite
-      const userResponse = await fetch("http://localhost:8000/users/", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          budget: Number(data.budget),
-          location: data.location,
-          commute: Number(data.commute),
-          job: data.job,
-          housingType: data.housingType,
-          community: data.community,
-          lifestyles: data.lifestyles,
-        }),
-      });
-
-      if (!userResponse.ok) {
-        throw new Error("Failed to save user data. Is the backend running?");
-      }
-
-      const userData = await userResponse.json();
-      const userId = userData.user.id;
-
-      // Step B: Fetch the Algorithmic Recommendations
-      const recResponse = await fetch(`http://localhost:8000/api/housing/${userId}`);
-      
-      if (!recResponse.ok) {
-        throw new Error("Failed to fetch neighborhood matches.");
-      }
-
-      const recData = await recResponse.json();
-      
-      // Update results and transition to the final page
-      setResults(recData.matches);
+      const matches = await fetchRecommendations(data);
+      setResults(matches);
       setStep(5);
-      
     } catch (err) {
-      setError(err.message || "Failed to connect to the server.");
+      setError(err.message || "We couldn’t connect to the recommendation service.");
       console.error(err);
     } finally {
       setIsLoading(false);
