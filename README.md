@@ -1,2 +1,7 @@
 # Newbiethoning
-hmhmhm
+backend requirements:
+fastapi
+uvicorn
+
+front end
+frontend
