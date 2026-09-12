@@ -17,6 +17,142 @@
   color: var(--ink);
 }
 
+/* =========================
+   HOMEPAGE
+   ========================= */
+
+.homepage {
+  width: 100%;
+  min-height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: rgba(247, 247, 244, 0.94);
+  padding: 40px 20px;
+  box-sizing: border-box;
+}
+
+.homepage-content {
+  max-width: 750px;
+  text-align: center;
+}
+
+/* LifeFit */
+
+.homepage-title {
+  margin: 0;
+
+  font-size: 100px;
+  font-weight: 800;
+  letter-spacing: -5px;
+
+  color: #1d1d1f;
+}
+
+.homepage-title span {
+  color: #5f8f78;
+}
+
+/* Subtitle */
+
+.homepage-subtitle {
+  margin-top: 25px;
+  margin-bottom: 0;
+
+  font-size: 30px;
+  font-weight: 500;
+
+  color: #252525;
+}
+
+/* Description */
+
+.homepage-description {
+  max-width: 620px;
+
+  margin: 18px auto 0;
+
+  font-size: 18px;
+  line-height: 1.7;
+
+  color: #737373;
+}
+
+/* Begin Button */
+
+.begin-button {
+  margin-top: 40px;
+
+  min-width: 230px;
+  padding: 16px 32px;
+
+  border: none;
+  border-radius: 50px;
+
+  background: #5f8f78;
+  color: white;
+
+  font-size: 18px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.begin-button span {
+  display: inline-block;
+  margin-left: 12px;
+
+  transition: transform 0.2s ease;
+}
+
+/* Interactive hover */
+
+.begin-button:hover {
+  background: #507c68;
+
+  transform: translateY(-3px);
+
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+}
+
+.begin-button:hover span {
+  transform: translateX(6px);
+}
+
+/* Click effect */
+
+.begin-button:active {
+  transform: translateY(0);
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+  .homepage-title {
+    font-size: 65px;
+    letter-spacing: -3px;
+  }
+
+  .homepage-subtitle {
+    font-size: 23px;
+  }
+
+  .homepage-description {
+    font-size: 16px;
+  }
+
+  .begin-button {
+    min-width: 200px;
+  }
+}
+
 button { color: inherit; }
 button:focus-visible, input:focus-visible, select:focus-visible {
   outline: 3px solid rgba(40, 91, 59, 0.18);
