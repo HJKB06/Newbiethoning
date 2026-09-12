@@ -22,8 +22,8 @@ class User(Base):
     community = Column(String)
     lifestyles = Column(String) # Stored as comma-separated string (e.g., "study,safety")
 
-# Drop and recreate tables to apply the new schema
-Base.metadata.drop_all(bind=engine)
+# Keep existing user data when the development server reloads.
+# Schema changes should be handled with a migration instead of dropping tables.
 Base.metadata.create_all(bind=engine)
 
 # 2. Pydantic Models (Incoming JSON Payload Validation)
@@ -304,6 +304,8 @@ def get_recommendations(user_id: int, db: Session = Depends(get_db)):
         ranked_areas.append({
             "name": area["name"],
             "name_en": area["name_en"],
+            "lat": area["lat"],
+            "lng": area["lng"],
             "rent": area["rent"],
             "commute": area["commute"],
             "housingScore": math.floor(housing_score + 0.5),

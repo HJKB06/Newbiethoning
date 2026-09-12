@@ -8,6 +8,32 @@ const LOCATIONS = {
   신림동: { x: 31, y: 74 },
 };
 
+// The map is a Seoul-focused schematic, so convert backend coordinates
+// into percentages inside a stable Seoul bounding box.
+const SEOUL_BOUNDS = {
+  minLat: 37.45,
+  maxLat: 37.70,
+  minLng: 126.82,
+  maxLng: 127.18,
+};
+
+function getMapPosition(area) {
+  if (area.lat != null && area.lng != null) {
+    return {
+      x:
+        ((area.lng - SEOUL_BOUNDS.minLng) /
+          (SEOUL_BOUNDS.maxLng - SEOUL_BOUNDS.minLng)) *
+        100,
+      y:
+        ((SEOUL_BOUNDS.maxLat - area.lat) /
+          (SEOUL_BOUNDS.maxLat - SEOUL_BOUNDS.minLat)) *
+        100,
+    };
+  }
+
+  return LOCATIONS[area.name] ?? { x: 50, y: 50 };
+}
+
 function zoomCoordinate(value, zoom) {
   return 50 + (value - 50) * zoom;
 }
@@ -27,10 +53,7 @@ function distance(a, b) {
 */
 function buildMarkerPositions(results, zoom) {
   const markers = results.map((area, index) => {
-    const base = LOCATIONS[area.name] ?? {
-      x: 50,
-      y: 50,
-    };
+    const base = getMapPosition(area);
 
     return {
       area,
