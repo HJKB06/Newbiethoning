@@ -36,45 +36,116 @@ class UserCreate(BaseModel):
     community: str
     lifestyles: list[str]
 
-# 3. Complex Neighborhood Dataset
+
+    # 3. Complex Neighborhood Dataset (15 Areas)
 AREAS = [
     {
-        "name": "안암동",
-        "name_en": "Anam",
-        "lat": 37.586,
-        "lng": 127.029,
-        "rent": 650000,
-        "commute": 10,
+        "name": "안암동", "name_en": "Anam", "lat": 37.586, "lng": 127.029, "rent": 650000, "commute": 10,
         "jobs": {"IT / Software": 72, "Business": 80, "Engineering": 75, "Healthcare": 65, "Education": 90},
         "housing": {"one-room": 95, "officetel": 80, "share-house": 70, "flexible": 85},
         "community": {"international": 65, "local": 85, "mixed": 78, "none": 75},
         "lifestyle": {"quiet": 80, "cafes": 75, "nightlife": 45, "fitness": 70, "study": 98, "safety": 88}
     },
     {
-        "name": "성수동",
-        "name_en": "Seongsu",
-        "lat": 37.544,
-        "lng": 127.057,
-        "rent": 950000,
-        "commute": 30,
+        "name": "성수동", "name_en": "Seongsu", "lat": 37.544, "lng": 127.057, "rent": 950000, "commute": 30,
         "jobs": {"IT / Software": 95, "Business": 90, "Engineering": 70, "Healthcare": 60, "Education": 50},
         "housing": {"one-room": 75, "officetel": 95, "share-house": 65, "flexible": 80},
         "community": {"international": 80, "local": 70, "mixed": 85, "none": 80},
         "lifestyle": {"quiet": 50, "cafes": 98, "nightlife": 85, "fitness": 90, "study": 60, "safety": 85}
     },
     {
-        "name": "신림동",
-        "name_en": "Sillim",
-        "lat": 37.484,
-        "lng": 126.929,
-        "rent": 500000,
-        "commute": 40,
+        "name": "신림동", "name_en": "Sillim", "lat": 37.484, "lng": 126.929, "rent": 500000, "commute": 40,
         "jobs": {"IT / Software": 85, "Business": 70, "Engineering": 65, "Healthcare": 75, "Education": 60},
         "housing": {"one-room": 98, "officetel": 70, "share-house": 85, "flexible": 85},
         "community": {"international": 40, "local": 95, "mixed": 65, "none": 70},
         "lifestyle": {"quiet": 70, "cafes": 65, "nightlife": 80, "fitness": 75, "study": 85, "safety": 70}
+    },
+    {
+        "name": "이태원동", "name_en": "Itaewon", "lat": 37.534, "lng": 126.994, "rent": 850000, "commute": 25,
+        "jobs": {"IT / Software": 60, "Business": 85, "Engineering": 50, "Healthcare": 40, "Education": 65},
+        "housing": {"one-room": 85, "officetel": 70, "share-house": 95, "flexible": 80},
+        "community": {"international": 98, "local": 40, "mixed": 90, "none": 75},
+        "lifestyle": {"quiet": 30, "cafes": 85, "nightlife": 98, "fitness": 60, "study": 45, "safety": 65}
+    },
+    {
+        "name": "신촌동", "name_en": "Sinchon", "lat": 37.559, "lng": 126.936, "rent": 700000, "commute": 20,
+        "jobs": {"IT / Software": 75, "Business": 80, "Engineering": 60, "Healthcare": 95, "Education": 95},
+        "housing": {"one-room": 95, "officetel": 85, "share-house": 80, "flexible": 85},
+        "community": {"international": 85, "local": 75, "mixed": 90, "none": 80},
+        "lifestyle": {"quiet": 40, "cafes": 95, "nightlife": 90, "fitness": 75, "study": 95, "safety": 80}
+    },
+    {
+        "name": "역삼동", "name_en": "Yeoksam", "lat": 37.500, "lng": 127.036, "rent": 1100000, "commute": 35,
+        "jobs": {"IT / Software": 98, "Business": 99, "Engineering": 85, "Healthcare": 80, "Education": 60},
+        "housing": {"one-room": 60, "officetel": 98, "share-house": 50, "flexible": 70},
+        "community": {"international": 70, "local": 80, "mixed": 75, "none": 75},
+        "lifestyle": {"quiet": 60, "cafes": 90, "nightlife": 85, "fitness": 95, "study": 70, "safety": 90}
+    },
+    {
+        "name": "혜화동", "name_en": "Hyehwa", "lat": 37.588, "lng": 127.001, "rent": 680000, "commute": 15,
+        "jobs": {"IT / Software": 65, "Business": 70, "Engineering": 60, "Healthcare": 90, "Education": 95},
+        "housing": {"one-room": 90, "officetel": 70, "share-house": 75, "flexible": 85},
+        "community": {"international": 75, "local": 85, "mixed": 80, "none": 75},
+        "lifestyle": {"quiet": 65, "cafes": 90, "nightlife": 70, "fitness": 60, "study": 95, "safety": 85}
+    },
+    {
+        "name": "노량진동", "name_en": "Noryangjin", "lat": 37.513, "lng": 126.944, "rent": 450000, "commute": 30,
+        "jobs": {"IT / Software": 50, "Business": 60, "Engineering": 50, "Healthcare": 55, "Education": 85},
+        "housing": {"one-room": 95, "officetel": 50, "share-house": 60, "flexible": 80},
+        "community": {"international": 30, "local": 98, "mixed": 50, "none": 70},
+        "lifestyle": {"quiet": 75, "cafes": 60, "nightlife": 40, "fitness": 50, "study": 99, "safety": 80}
+    },
+    {
+        "name": "서교동 (홍대)", "name_en": "Hongdae", "lat": 37.554, "lng": 126.918, "rent": 800000, "commute": 25,
+        "jobs": {"IT / Software": 80, "Business": 85, "Engineering": 65, "Healthcare": 50, "Education": 75},
+        "housing": {"one-room": 85, "officetel": 75, "share-house": 85, "flexible": 80},
+        "community": {"international": 90, "local": 65, "mixed": 95, "none": 80},
+        "lifestyle": {"quiet": 20, "cafes": 99, "nightlife": 99, "fitness": 70, "study": 65, "safety": 75}
+    },
+    {
+        "name": "잠실동", "name_en": "Jamsil", "lat": 37.511, "lng": 127.084, "rent": 1050000, "commute": 45,
+        "jobs": {"IT / Software": 85, "Business": 95, "Engineering": 75, "Healthcare": 80, "Education": 70},
+        "housing": {"one-room": 50, "officetel": 95, "share-house": 40, "flexible": 70},
+        "community": {"international": 65, "local": 90, "mixed": 80, "none": 75},
+        "lifestyle": {"quiet": 85, "cafes": 85, "nightlife": 60, "fitness": 98, "study": 75, "safety": 95}
+    },
+    {
+        "name": "구로동", "name_en": "Guro", "lat": 37.495, "lng": 126.887, "rent": 550000, "commute": 50,
+        "jobs": {"IT / Software": 95, "Business": 85, "Engineering": 90, "Healthcare": 60, "Education": 50},
+        "housing": {"one-room": 85, "officetel": 85, "share-house": 60, "flexible": 80},
+        "community": {"international": 70, "local": 85, "mixed": 75, "none": 70},
+        "lifestyle": {"quiet": 65, "cafes": 60, "nightlife": 65, "fitness": 70, "study": 60, "safety": 75}
+    },
+    {
+        "name": "행당동 (왕십리)", "name_en": "Wangsimni", "lat": 37.561, "lng": 127.035, "rent": 750000, "commute": 15,
+        "jobs": {"IT / Software": 75, "Business": 85, "Engineering": 80, "Healthcare": 85, "Education": 85},
+        "housing": {"one-room": 85, "officetel": 90, "share-house": 75, "flexible": 85},
+        "community": {"international": 70, "local": 85, "mixed": 80, "none": 75},
+        "lifestyle": {"quiet": 60, "cafes": 85, "nightlife": 75, "fitness": 80, "study": 85, "safety": 85}
+    },
+    {
+        "name": "수유동", "name_en": "Suyu", "lat": 37.638, "lng": 127.022, "rent": 450000, "commute": 40,
+        "jobs": {"IT / Software": 40, "Business": 50, "Engineering": 45, "Healthcare": 60, "Education": 60},
+        "housing": {"one-room": 95, "officetel": 60, "share-house": 70, "flexible": 80},
+        "community": {"international": 30, "local": 95, "mixed": 50, "none": 70},
+        "lifestyle": {"quiet": 85, "cafes": 65, "nightlife": 60, "fitness": 75, "study": 70, "safety": 80}
+    },
+    {
+        "name": "서초동", "name_en": "Seocho", "lat": 37.483, "lng": 127.014, "rent": 1200000, "commute": 35,
+        "jobs": {"IT / Software": 90, "Business": 95, "Engineering": 80, "Healthcare": 95, "Education": 80},
+        "housing": {"one-room": 40, "officetel": 95, "share-house": 40, "flexible": 60},
+        "community": {"international": 75, "local": 85, "mixed": 80, "none": 75},
+        "lifestyle": {"quiet": 90, "cafes": 85, "nightlife": 50, "fitness": 90, "study": 85, "safety": 98}
+    },
+    {
+        "name": "망원동", "name_en": "Mangwon", "lat": 37.556, "lng": 126.904, "rent": 650000, "commute": 30,
+        "jobs": {"IT / Software": 70, "Business": 75, "Engineering": 60, "Healthcare": 50, "Education": 60},
+        "housing": {"one-room": 85, "officetel": 60, "share-house": 80, "flexible": 85},
+        "community": {"international": 65, "local": 90, "mixed": 75, "none": 75},
+        "lifestyle": {"quiet": 75, "cafes": 95, "nightlife": 65, "fitness": 80, "study": 70, "safety": 80}
     }
 ]
+
 
 # 4. App Initialization & CORS
 app = FastAPI()
