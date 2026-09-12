@@ -147,39 +147,79 @@ AREAS = [
 ]
 
 import random
-random.seed(42) # Ensures the data stays consistent on every refresh
 
-# Dynamically generate 3 properties for every neighborhood
+random.seed(42)  # Keeps generated data consistent
+
+ONE_ROOM_TITLES = [
+    "Sunny {area} One-room",
+    "Quiet Studio near {area}",
+    "Bright Corner Room in {area}",
+    "Compact City Studio — {area}",
+    "Modern One-room near Transit",
+    "Cozy Student Studio in {area}",
+    "Minimal Studio with Natural Light",
+    "Convenient One-room near Campus",
+]
+
+OFFICETEL_TITLES = [
+    "Secure High-rise Officetel",
+    "Modern Officetel in {area}",
+    "City-view Officetel near Station",
+    "Newly Built Officetel — {area}",
+    "Premium Officetel with Security",
+    "Compact Business District Officetel",
+    "High-floor Officetel near Transit",
+    "Clean Furnished Officetel in {area}",
+]
+
+SHARE_HOUSE_TITLES = [
+    "Cozy Share-house (Private Room)",
+    "Friendly Share-house in {area}",
+    "International Share-house near Campus",
+    "Private Room in Community House",
+    "Affordable Share-house — {area}",
+    "Social Living House with Private Room",
+    "Student Share-house near Station",
+    "Quiet Private Room in Shared Home",
+]
+
 for idx, area in enumerate(AREAS):
     base_rent = area["rent"]
+
     area["properties"] = [
         {
             "id": f"prop-{idx}-1",
-            "title": f"Sunny {area['name_en']} One-room",
+            "title": random.choice(ONE_ROOM_TITLES).format(
+                area=area["name_en"]
+            ),
             "type": "one-room",
             "deposit": 10000000,
             "rent": base_rent - 50000,
             "foreigner_friendly": True,
-            "gender": "Any"
+            "gender": "Any",
         },
         {
             "id": f"prop-{idx}-2",
-            "title": f"Secure High-rise Officetel",
+            "title": random.choice(OFFICETEL_TITLES).format(
+                area=area["name_en"]
+            ),
             "type": "officetel",
             "deposit": 20000000,
             "rent": base_rent + 150000,
             "foreigner_friendly": False,
-            "gender": "Female Only"
+            "gender": "Female Only",
         },
         {
             "id": f"prop-{idx}-3",
-            "title": f"Cozy Share-house (Private Room)",
+            "title": random.choice(SHARE_HOUSE_TITLES).format(
+                area=area["name_en"]
+            ),
             "type": "share-house",
             "deposit": 3000000,
             "rent": base_rent - 150000,
             "foreigner_friendly": True,
-            "gender": "Any"
-        }
+            "gender": "Any",
+        },
     ]
 
 
