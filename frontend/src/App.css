@@ -1,184 +1,368 @@
-.counter {
-  font-size: 16px;
-  padding: 5px 10px;
-  border-radius: 5px;
-  color: var(--accent);
-  background: var(--accent-bg);
-  border: 2px solid transparent;
-  transition: border-color 0.3s;
-  margin-bottom: 24px;
+#root {
+  min-height: 100vh;
+}
 
-  &:hover {
-    border-color: var(--accent-border);
-  }
-  &:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
-  }
+.app {
+  min-height: 100vh;
+  background: #f6f7f2;
+  color: #17251c;
+}
+
+.navbar {
+  height: 72px;
+  padding: 0 8%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #dfe3dc;
+}
+
+.navbar h2 {
+  margin: 0;
+  font-size: 22px;
+}
+
+.navbar span {
+  color: #647269;
+  font-size: 14px;
 }
 
 .hero {
-  position: relative;
+  min-height: calc(100vh - 73px);
+  padding: 60px 8%;
+  display: grid;
+  grid-template-columns: 1fr 430px;
+  gap: 80px;
+  align-items: center;
+}
 
-  .base,
-  .framework,
-  .vite {
-    inset-inline: 0;
-    margin: 0 auto;
+.tag {
+  color: #47755b;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.intro h1 {
+  margin: 18px 0;
+  font-size: clamp(60px, 7vw, 105px);
+  line-height: 0.9;
+  letter-spacing: -5px;
+}
+
+.description {
+  max-width: 550px;
+  color: #657168;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.search-card {
+  background: white;
+  padding: 35px;
+  border-radius: 24px;
+  box-shadow: 0 20px 60px rgba(31, 48, 38, 0.1);
+}
+
+.search-card h2 {
+  margin: 0 0 28px;
+  font-size: 26px;
+}
+
+.search-card label {
+  display: block;
+  margin-bottom: 20px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.search-card input,
+.search-card select {
+  box-sizing: border-box;
+  width: 100%;
+  margin-top: 8px;
+  padding: 14px 16px;
+  border: 1px solid #d8ddd9;
+  border-radius: 10px;
+  background: #fafbf9;
+  font-size: 15px;
+}
+
+.search-card input:focus,
+.search-card select:focus {
+  outline: 2px solid #47755b;
+  border-color: transparent;
+}
+
+.search-card button {
+  width: 100%;
+  margin-top: 10px;
+  padding: 16px;
+  border: 0;
+  border-radius: 10px;
+  background: #1d4d35;
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.search-card button:hover {
+  background: #153b28;
+}
+
+@media (max-width: 850px) {
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 40px;
   }
 
-  .base {
-    width: 170px;
-    position: relative;
-    z-index: 0;
-  }
-
-  .framework,
-  .vite {
-    position: absolute;
-  }
-
-  .framework {
-    z-index: 1;
-    top: 34px;
-    height: 28px;
-    transform: perspective(2000px) rotateZ(300deg) rotateX(44deg) rotateY(39deg)
-      scale(1.4);
-  }
-
-  .vite {
-    z-index: 0;
-    top: 107px;
-    height: 26px;
-    width: auto;
-    transform: perspective(2000px) rotateZ(300deg) rotateX(40deg) rotateY(39deg)
-      scale(0.8);
+  .intro h1 {
+    font-size: 60px;
   }
 }
 
-#center {
+/* LifeFit page overrides */
+
+.app {
+  width: 100%;
+  min-height: 100vh;
+  text-align: left;
+  color: #17251c;
+}
+
+.app h1,
+.app h2,
+.app p,
+.app span,
+.app label {
+  color: inherit;
+}
+
+.navbar h2 {
+  color: #17251c;
+}
+
+.navbar span {
+  color: #647269;
+}
+
+.intro {
+  text-align: left;
+}
+
+.intro .tag {
+  color: #47755b;
+}
+
+.intro h1 {
+  color: #17251c;
+}
+
+.intro .description {
+  color: #657168;
+}
+
+.search-card {
+  color: #17251c;
+  text-align: left;
+}
+
+.search-card h2 {
+  color: #17251c;
+}
+
+.search-card label {
+  color: #17251c;
+}
+
+.search-card input,
+.search-card select {
+  color: #17251c;
+  background: #fafbf9;
+}
+
+.search-card input::placeholder {
+  color: #9aa39d;
+}
+
+.search-card option {
+  color: #17251c;
+  background: white;
+}
+
+.search-card button {
+  color: white;
+}
+
+.results {
+  padding: 80px 8%;
+  background: white;
+}
+
+.results > h2 {
+  margin: 10px 0 35px;
+  font-size: 42px;
+  color: #17251c;
+}
+
+.result-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.result-card {
+  position: relative;
+  padding: 30px;
+  border: 1px solid #dfe3dc;
+  border-radius: 20px;
+  color: #17251c;
+}
+
+.result-card h3 {
+  margin: 15px 0;
+  font-size: 28px;
+}
+
+.rank {
+  font-size: 14px;
+  font-weight: 700;
+  color: #47755b;
+}
+
+.score {
+  margin-top: 20px;
+  font-size: 60px;
+  font-weight: 700;
+  line-height: 1;
+  color: #1d4d35;
+}
+
+.result-card hr {
+  margin: 25px 0;
+  border: 0;
+  border-top: 1px solid #e3e6e2;
+}
+
+@media (max-width: 850px) {
+  .result-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.preference-page {
+  min-height: calc(100vh - 73px);
+  padding: 80px 8%;
+  background: #f6f7f2;
+  color: #17251c;
+}
+
+.preference-page h1 {
+  max-width: 800px;
+  margin: 15px 0;
+  font-size: 56px;
+  line-height: 1;
+  color: #17251c;
+}
+
+.preference-grid {
+  margin-top: 45px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.preference-card {
+  min-height: 170px;
+  padding: 28px;
+
   display: flex;
   flex-direction: column;
-  gap: 25px;
-  place-content: center;
-  place-items: center;
-  flex-grow: 1;
+  align-items: flex-start;
+  gap: 10px;
 
-  @media (max-width: 1024px) {
-    padding: 32px 20px 24px;
-    gap: 18px;
-  }
-}
+  border: 2px solid transparent;
+  border-radius: 20px;
 
-#next-steps {
-  display: flex;
-  border-top: 1px solid var(--border);
+  background: white;
+  color: #17251c;
+
   text-align: left;
+  cursor: pointer;
 
-  & > div {
-    flex: 1 1 0;
-    padding: 32px;
-    @media (max-width: 1024px) {
-      padding: 24px 20px;
-    }
-  }
+  box-shadow: 0 10px 30px rgba(31, 48, 38, 0.06);
 
-  .icon {
-    margin-bottom: 16px;
-    width: 22px;
-    height: 22px;
-  }
-
-  @media (max-width: 1024px) {
-    flex-direction: column;
-    text-align: center;
-  }
+  transition: 0.2s;
 }
 
-#docs {
-  border-right: 1px solid var(--border);
-
-  @media (max-width: 1024px) {
-    border-right: none;
-    border-bottom: 1px solid var(--border);
-  }
+.preference-card:hover {
+  transform: translateY(-3px);
+  border-color: #95aa9e;
 }
 
-#next-steps ul {
-  list-style: none;
-  padding: 0;
+.preference-card.selected {
+  border-color: #1d4d35;
+  background: #eef4ef;
+}
+
+.preference-icon {
+  font-size: 30px;
+}
+
+.preference-card strong {
+  font-size: 20px;
+}
+
+.preference-card span:last-child {
+  color: #657168;
+}
+
+.preference-actions {
+  margin-top: 35px;
+
   display: flex;
-  gap: 8px;
-  margin: 32px 0 0;
-
-  .logo {
-    height: 18px;
-  }
-
-  a {
-    color: var(--text-h);
-    font-size: 16px;
-    border-radius: 6px;
-    background: var(--social-bg);
-    display: flex;
-    padding: 6px 12px;
-    align-items: center;
-    gap: 8px;
-    text-decoration: none;
-    transition: box-shadow 0.3s;
-
-    &:hover {
-      box-shadow: var(--shadow);
-    }
-    .button-icon {
-      height: 18px;
-      width: 18px;
-    }
-  }
-
-  @media (max-width: 1024px) {
-    margin-top: 20px;
-    flex-wrap: wrap;
-    justify-content: center;
-
-    li {
-      flex: 1 1 calc(50% - 8px);
-    }
-
-    a {
-      width: 100%;
-      justify-content: center;
-      box-sizing: border-box;
-    }
-  }
+  justify-content: space-between;
+  align-items: center;
 }
 
-#spacer {
-  height: 88px;
-  border-top: 1px solid var(--border);
-  @media (max-width: 1024px) {
-    height: 48px;
-  }
+.primary-button {
+  padding: 15px 26px;
+
+  border: none;
+  border-radius: 10px;
+
+  background: #1d4d35;
+  color: white;
+
+  font-size: 15px;
+  font-weight: 700;
+
+  cursor: pointer;
 }
 
-.ticks {
-  position: relative;
-  width: 100%;
+.primary-button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
 
-  &::before,
-  &::after {
-    content: '';
-    position: absolute;
-    top: -4.5px;
-    border: 5px solid transparent;
+.back-button {
+  padding: 12px 0;
+
+  border: none;
+  background: transparent;
+
+  color: #47755b;
+
+  font-weight: 700;
+  cursor: pointer;
+}
+
+@media (max-width: 850px) {
+  .preference-grid {
+    grid-template-columns: 1fr;
   }
 
-  &::before {
-    left: 0;
-    border-left-color: var(--border);
-  }
-  &::after {
-    right: 0;
-    border-right-color: var(--border);
+  .preference-page h1 {
+    font-size: 40px;
   }
 }
