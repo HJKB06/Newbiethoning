@@ -37,12 +37,10 @@ function App() {
     setIsLoading(true);
     setError("");
 
-<<<<<<< HEAD
     try {
       const response = await fetch(
         `http://localhost:8000/api/housing/${user_id}`
       );
-=======
     const rankedAreas = areas
       .map((area) => {
         const housingScore =
@@ -52,7 +50,6 @@ function App() {
                 0,
                 100 - ((area.rent - userBudget) / userBudget) * 100
               );
->>>>>>> cf2eb5bf4d6025e9c6a20f098f299749f492a338
 
       if (!response.ok) {
         throw new Error("Unable to load recommendations.");
