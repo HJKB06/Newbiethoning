@@ -1,4 +1,4 @@
-# Newbiethoning
+# LifeFit seoul
 backend requirements:
 fastapi
 uvicorn
