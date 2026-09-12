@@ -12,33 +12,9 @@ function App() {
   const [community, setCommunity] = useState("");
 
   const [results, setResults] = useState([]);
-
-  const areas = [
-    {
-      name: "안암동",
-      rent: 650000,
-      commute: 10,
-      jobs: 72,
-    },
-    {
-      name: "회기동",
-      rent: 580000,
-      commute: 25,
-      jobs: 68,
-    },
-    {
-      name: "신림동",
-      rent: 520000,
-      commute: 38,
-      jobs: 85,
-    },
-    {
-      name: "성수동",
-      rent: 900000,
-      commute: 30,
-      jobs: 95,
-    },
-  ];
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
+  const user_id = 1;
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -47,49 +23,27 @@ function App() {
     setStep(2);
   };
 
-  const generateResults = () => {
-    const userBudget = Number(budget);
-    const maxCommute = Number(commute);
+  const generateResults = async () => {
+    setIsLoading(true);
+    setError("");
 
-    const rankedAreas = areas
-      .map((area) => {
-        const housingScore =
-          area.rent <= userBudget
-            ? 100
-            : Math.max(
-                0,
-                100 -
-                  ((area.rent - userBudget) / userBudget) * 100
-              );
+    try {
+      const response = await fetch(
+        `http://localhost:8000/api/housing/${user_id}`
+      );
 
-        const transportScore =
-          area.commute <= maxCommute
-            ? 100
-            : Math.max(
-                0,
-                100 - (area.commute - maxCommute) * 3
-              );
+      if (!response.ok) {
+        throw new Error("Unable to load recommendations.");
+      }
 
-        const jobScore = area.jobs;
-
-        const score =
-          housingScore * 0.4 +
-          transportScore * 0.35 +
-          jobScore * 0.25;
-
-        return {
-          ...area,
-          housingScore: Math.round(housingScore),
-          transportScore: Math.round(transportScore),
-          jobScore,
-          score: Math.round(score),
-        };
-      })
-      .sort((a, b) => b.score - a.score)
-      .slice(0, 3);
-
-    setResults(rankedAreas);
-    setStep(3);
+      const data = await response.json();
+      setResults(data.matches);
+      setStep(3);
+    } catch (requestError) {
+      setError(requestError.message);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   // STEP 2 — Community Preference
@@ -176,11 +130,13 @@ function App() {
             <button
               className="primary-button"
               onClick={generateResults}
-              disabled={!community}
+              disabled={!community || isLoading}
             >
-              See My Results →
+              {isLoading ? "Loading..." : "See My Results →"}
             </button>
           </div>
+
+          {error && <p role="alert">{error}</p>}
         </main>
       </div>
     );
