@@ -18,7 +18,15 @@ export async function fetchRecommendations(formData) {
   const createResponse = await fetch(`${API_URL}/users/`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ budget: Number(formData.budget), location: formData.location.trim(), commute: Number(formData.commute), job: formData.job, community: formData.community }),
+    body: JSON.stringify({
+      budget: Number(formData.budget),
+      location: formData.location.trim(),
+      commute: Number(formData.commute),
+      job: formData.job,
+      housingType: formData.housingType,
+      community: formData.community,
+      lifestyles: formData.lifestyles,
+    }),
   });
   const created = await parseResponse(createResponse, "We couldn’t save your preferences.");
   const recommendationResponse = await fetch(`${API_URL}/api/housing/${created.user.id}`);
