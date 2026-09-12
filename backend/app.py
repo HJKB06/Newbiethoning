@@ -146,6 +146,42 @@ AREAS = [
     }
 ]
 
+import random
+random.seed(42) # Ensures the data stays consistent on every refresh
+
+# Dynamically generate 3 properties for every neighborhood
+for idx, area in enumerate(AREAS):
+    base_rent = area["rent"]
+    area["properties"] = [
+        {
+            "id": f"prop-{idx}-1",
+            "title": f"Sunny {area['name_en']} One-room",
+            "type": "one-room",
+            "deposit": 10000000,
+            "rent": base_rent - 50000,
+            "foreigner_friendly": True,
+            "gender": "Any"
+        },
+        {
+            "id": f"prop-{idx}-2",
+            "title": f"Secure High-rise Officetel",
+            "type": "officetel",
+            "deposit": 20000000,
+            "rent": base_rent + 150000,
+            "foreigner_friendly": False,
+            "gender": "Female Only"
+        },
+        {
+            "id": f"prop-{idx}-3",
+            "title": f"Cozy Share-house (Private Room)",
+            "type": "share-house",
+            "deposit": 3000000,
+            "rent": base_rent - 150000,
+            "foreigner_friendly": True,
+            "gender": "Any"
+        }
+    ]
+
 
 # 4. App Initialization & CORS
 app = FastAPI()
@@ -234,7 +270,8 @@ def get_recommendations(user_id: int, db: Session = Depends(get_db)):
             "transportScore": math.floor(transport_score + 0.5),
             "jobScore": job_score,
             "score": math.floor(final_score + 0.5),
-            "reasons": reasons[:3] # Return top 3 reasons max
+            "reasons": reasons[:3],
+            "properties": area["properties"] 
         })
 
     ranked_areas.sort(key=lambda area: area["score"], reverse=True)
